@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Employee, AppState } from '../types';
-import { Search, UserCircle2 } from 'lucide-react';
+import { Search, UserCircle2, HelpCircle, ChevronDown, ChevronUp, BookOpen } from 'lucide-react';
 import { Language, translations } from '../src/data/translations';
 
 interface Props {
@@ -13,6 +13,7 @@ interface Props {
 
 const FrontUI: React.FC<Props> = ({ state, onSelect, language, onLanguageChange }) => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [showInstructions, setShowInstructions] = useState(true);
 
   const t = translations[language];
 
@@ -124,6 +125,79 @@ const FrontUI: React.FC<Props> = ({ state, onSelect, language, onLanguageChange 
               <Search size={48} className="text-slate-200" />
               <p className="font-black text-lg">{t.noStaffFound} "{searchTerm}"</p>
               <p className="text-xs uppercase tracking-widest font-bold">{t.checkIdTryAgain}</p>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Collapsible User Instructions Section */}
+      <div className="mt-12 max-w-4xl mx-auto bg-slate-50 border border-slate-200/60 rounded-[1.8rem] overflow-hidden transition-all duration-300">
+        <button
+          onClick={() => setShowInstructions(!showInstructions)}
+          className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-slate-100/50 transition-colors"
+        >
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center">
+              <BookOpen className="w-5 h-5" />
+            </div>
+            <div>
+              <h4 className="font-black text-slate-800 tracking-tight text-sm sm:text-base">
+                {t.instructionsTitle}
+              </h4>
+              <p className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+                {t.instructionsSubtitle}
+              </p>
+            </div>
+          </div>
+          <div className="text-slate-400">
+            {showInstructions ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+          </div>
+        </button>
+
+        {showInstructions && (
+          <div className="p-6 border-t border-slate-200/40 bg-white grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Step 1 */}
+            <div className="p-4 rounded-2xl bg-slate-50/50 border border-slate-100 flex gap-3.5 items-start">
+              <div className="w-7 h-7 rounded-lg bg-indigo-600 text-white flex items-center justify-center text-xs font-black shrink-0">
+                1
+              </div>
+              <div>
+                <h5 className="font-extrabold text-slate-800 text-sm mb-1">{t.step1Title}</h5>
+                <p className="text-xs text-slate-500 font-medium leading-relaxed">{t.step1Desc}</p>
+              </div>
+            </div>
+
+            {/* Step 2 */}
+            <div className="p-4 rounded-2xl bg-slate-50/50 border border-slate-100 flex gap-3.5 items-start">
+              <div className="w-7 h-7 rounded-lg bg-indigo-600 text-white flex items-center justify-center text-xs font-black shrink-0">
+                2
+              </div>
+              <div>
+                <h5 className="font-extrabold text-slate-800 text-sm mb-1">{t.step2Title}</h5>
+                <p className="text-xs text-slate-500 font-medium leading-relaxed">{t.step2Desc}</p>
+              </div>
+            </div>
+
+            {/* Step 3 */}
+            <div className="p-4 rounded-2xl bg-slate-50/50 border border-slate-100 flex gap-3.5 items-start">
+              <div className="w-7 h-7 rounded-lg bg-indigo-600 text-white flex items-center justify-center text-xs font-black shrink-0">
+                3
+              </div>
+              <div>
+                <h5 className="font-extrabold text-slate-800 text-sm mb-1">{t.step3Title}</h5>
+                <p className="text-xs text-slate-500 font-medium leading-relaxed">{t.step3Desc}</p>
+              </div>
+            </div>
+
+            {/* Step 4 */}
+            <div className="p-4 rounded-2xl bg-slate-50/50 border border-slate-100 flex gap-3.5 items-start">
+              <div className="w-7 h-7 rounded-lg bg-indigo-600 text-white flex items-center justify-center text-xs font-black shrink-0">
+                4
+              </div>
+              <div>
+                <h5 className="font-extrabold text-slate-800 text-sm mb-1">{t.step4Title}</h5>
+                <p className="text-xs text-slate-500 font-medium leading-relaxed">{t.step4Desc}</p>
+              </div>
             </div>
           </div>
         )}

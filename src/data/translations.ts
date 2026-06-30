@@ -53,7 +53,23 @@ export const translations = {
     lastPersonPrompt: "You are the last person to clock out today. Would you like to download the daily Excel report?",
     downloadReport: "Download Report",
     skipReturnHome: "Skip & Return Home",
+    thankYou: "Thank You",
+    jobEndedDesc: "Your job session has been recorded successfully. Have a safe day ahead!",
     systemNotice7pm: "System Notice: It is past 7:00 PM. All active jobs have been auto-ended.",
+    
+    // User Instructions
+    instructionsTitle: "Quick User Instructions",
+    instructionsSubtitle: "Follow these simple steps to log your welding daily hours:",
+    step1Title: "1. Clock-In",
+    step1Desc: "Select your name/ID from the list (use search if needed).",
+    step2Title: "2. Select Part",
+    step2Desc: "Click a trailer part from the manual list or enter a drawing number manually.",
+    step3Title: "3. Weld Details",
+    step3Desc: "Select the type of welding and your assigned Unit Number, then click 'Start Welding Job'.",
+    step4Title: "4. Clock-Out",
+    step4Desc: "When your task is completed, select your name from the active list, click 'End Welding Job' and confirm with 'Thank You'.",
+    hideInstructions: "Hide Instructions",
+    showInstructions: "Show Instructions",
 
     // Drawing descriptions
     descEndCarriage: "End Carriage Underside",
@@ -114,7 +130,23 @@ export const translations = {
     lastPersonPrompt: "您是今天最后一位下班打卡的员工。您是否要下载每日 Excel 报告？",
     downloadReport: "下载报告",
     skipReturnHome: "跳过并返回主页",
+    thankYou: "谢谢",
+    jobEndedDesc: "您的工作会话已成功记录。祝您度过安全的一天！",
     systemNotice7pm: "系统提示：当前已过晚上 7:00。所有进行中的任务已自动结束。",
+
+    // User Instructions
+    instructionsTitle: "快速操作指南",
+    instructionsSubtitle: "请按照以下简单步骤记录您的每日焊接工时：",
+    step1Title: "1. 打卡上班",
+    step1Desc: "从列表中选择您的姓名/工号（可使用搜索栏快速查找）。",
+    step2Title: "2. 选择部件",
+    step2Desc: "从说明书列表中点击相应的挂车部件，或手动输入图纸编号。",
+    step3Title: "3. 焊接详情",
+    step3Desc: "选择焊接类型和您分配的单元编号，然后点击“开始焊接工作”。",
+    step4Title: "4. 打卡下班",
+    step4Desc: "任务完成后，从活动列表中选择您的姓名，点击“结束焊接工作”，并点击“谢谢”确认。",
+    hideInstructions: "隐藏指南",
+    showInstructions: "显示指南",
 
     // Drawing descriptions
     descEndCarriage: "端梁底部",

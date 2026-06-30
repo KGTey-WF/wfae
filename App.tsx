@@ -224,8 +224,8 @@ const App: React.FC = () => {
           <div className="text-[10px] font-bold uppercase tracking-[0.15em] text-slate-400">
             WorkTrack Pro Management System &bull; Version 1.5.1
           </div>
-          <div className="mt-1 text-[9px] text-slate-300 font-medium">
-            &copy; {new Date().getFullYear()} WONG FONG ENGINEERING WORKS (1988) PTE LTD. All Rights Reserved.
+          <div className="mt-1 text-[9px] text-sky-500 font-semibold">
+            Created by KG TEY, 2026
           </div>
         </div>
       </footer>

@@ -137,9 +137,6 @@ const WorkerUI: React.FC<Props> = ({
     setIsSaving(true);
     const now = new Date();
     
-    // Check how many people are currently working (excluding self)
-    const activeSessionsCount = entries.filter(e => e.id !== inProgressEntry.id && !e.endTime).length;
-    
     const updatedEntries = entries.map(e => 
         e.id === inProgressEntry.id ? { ...e, endTime: now.toISOString(), remarks: remarks.trim() || undefined } : e
     );
@@ -147,14 +144,8 @@ const WorkerUI: React.FC<Props> = ({
     onUpdateEntries(updatedEntries);
     setIsSaving(false);
     setRemarks('');
-
-    // If no one else is working, prompt for report
-    if (activeSessionsCount === 0) {
-        setInProgressEntry(null); 
-        setShowDailyReportPrompt(true);
-    } else {
-        onExit();
-    }
+    setInProgressEntry(null); 
+    setShowDailyReportPrompt(true);
   };
 
   const handleClear = () => {
@@ -207,26 +198,20 @@ const WorkerUI: React.FC<Props> = ({
       {showDailyReportPrompt && (
         <div className="fixed inset-0 z-[70] flex items-center justify-center p-4 bg-slate-900/80 backdrop-blur-md animate-in fade-in duration-300">
            <div className="bg-white rounded-[2.5rem] p-8 max-w-sm w-full shadow-2xl animate-in zoom-in-95 duration-300 text-center relative overflow-hidden">
-                <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-emerald-400 to-emerald-600"></div>
-                <div className="w-20 h-20 bg-emerald-50 text-emerald-600 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-inner">
-                    <FileSpreadsheet size={40} />
+                <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-[#5B51D8] to-[#11335D]"></div>
+                <div className="w-20 h-20 bg-indigo-50 text-[#5B51D8] rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-inner">
+                    <CheckCircle2 size={40} className="text-[#5B51D8]" />
                 </div>
                 <h3 className="text-2xl font-black text-slate-900 mb-2 tracking-tight">{t.allTasksCompleted}</h3>
-                <p className="text-slate-500 text-sm mb-8 font-medium">
-                    {t.lastPersonPrompt}
+                <p className="text-slate-500 text-sm mb-8 font-medium leading-relaxed">
+                    {t.jobEndedDesc}
                 </p>
                 <div className="space-y-3">
                     <button 
-                        onClick={exportDailyExcel}
-                        className="w-full py-4 bg-emerald-600 text-white rounded-xl font-black text-lg hover:bg-emerald-700 transition-all shadow-xl shadow-emerald-100 flex items-center justify-center gap-2"
-                    >
-                        <Download size={20} /> {t.downloadReport}
-                    </button>
-                    <button 
                         onClick={onExit}
-                        className="w-full py-4 bg-slate-100 text-slate-500 rounded-xl font-bold hover:bg-slate-200 transition-all"
+                        className="w-full py-4 bg-[#5B51D8] hover:bg-[#483ec7] text-white rounded-xl font-black text-lg transition-all shadow-xl shadow-indigo-100 flex items-center justify-center gap-2 active:scale-95"
                     >
-                        {t.skipReturnHome}
+                        {t.thankYou}
                     </button>
                 </div>
            </div>
@@ -462,13 +447,13 @@ const WorkerUI: React.FC<Props> = ({
 
                 {/* Captured Thumbnail Card displaying the captured image & part number */}
                 <div className="w-full max-w-md bg-white rounded-3xl p-4 sm:p-6 flex flex-col items-center justify-center shadow-xl mb-6 sm:mb-8">
-                  <div className="w-full max-w-[240px] aspect-[4/3] bg-slate-50 border border-slate-100 rounded-2xl p-4 flex items-center justify-center">
+                  <div className="w-full max-w-[340px] aspect-[4/3] bg-slate-50 border border-slate-100 rounded-2xl p-4 flex items-center justify-center">
                     {selectedPart ? (
                       <img 
                         src={selectedPart.imageUrl} 
                         alt={selectedPart.id} 
                         referrerPolicy="no-referrer"
-                        className="max-w-full max-h-32 object-contain"
+                        className="max-w-full max-h-48 sm:max-h-56 object-contain"
                       />
                     ) : (
                       <div className="flex flex-col items-center justify-center text-slate-300">
@@ -491,32 +476,6 @@ const WorkerUI: React.FC<Props> = ({
                         {partDesc}
                       </span>
                     )}
-                  </div>
-                </div>
-
-                {/* Clickable White PDF card */}
-                <div 
-                  onClick={() => setStep('WELDING_SELECTION')}
-                  className="w-full max-w-md bg-white text-slate-800 rounded-3xl p-4 sm:p-5 flex items-center justify-between shadow-xl cursor-pointer hover:scale-[1.02] active:scale-[0.99] transition-all"
-                >
-                  <div className="flex items-center gap-3 sm:gap-4 overflow-hidden">
-                    {/* Tiny Blueprint/PDF visual */}
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-rose-50 text-rose-500 rounded-2xl flex items-center justify-center border border-rose-100 shadow-sm shrink-0">
-                      <FileText size={20} className="sm:size-[24px]" />
-                    </div>
-                    <div className="overflow-hidden">
-                      <h4 className="font-extrabold text-xs sm:text-sm text-slate-800 uppercase tracking-tight leading-tight truncate">
-                        {selectedProject.id}.PDF.pdf
-                      </h4>
-                      {partDesc && (
-                        <p className="text-[10px] sm:text-xs text-slate-400 font-bold mt-0.5 truncate">
-                          {partDesc}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 shrink-0">
-                    <ChevronRight size={18} />
                   </div>
                 </div>
 
