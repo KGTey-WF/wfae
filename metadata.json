@@ -1,0 +1,6 @@
+{
+  "name": "Welding WorkTrack",
+  "description": "A streamlined daily working hours tracker for employees to log time against specific welding parts, including administrative controls and Excel reporting.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
